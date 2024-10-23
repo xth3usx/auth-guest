@@ -1,7 +1,5 @@
 # Portal de Acesso Wi-Fi - Autenticação via Gov.br
 
-Este repositório contém o código de um portal de acesso Wi-Fi que implementa autenticação via Gov.br, utilizando o protocolo OAuth2.
-
 ## Funcionalidades
 
 - **Autenticação segura via OAuth2 (Gov.br)**
