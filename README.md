@@ -1,11 +1,3 @@
-# Portal de Acesso Wi-Fi - Autenticação via Gov.br
-
-## Funcionalidades
-
-- **Autenticação segura via OAuth2 (Gov.br)**
-- **Implementação PKCE** para segurança adicional
-- **Interface responsiva** para dispositivos móveis
-
 ## Estrutura do Projeto
 
 - `index.php`: Inicia o processo de autenticação via Gov.br
