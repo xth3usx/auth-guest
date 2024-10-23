@@ -110,7 +110,6 @@ $auth_url = AUTH_URL . '?response_type=code'
 </head>
 <body>
     <div class="container">
-        <!-- Logo da Universidade -->
         <div class="logo">
             <img src="/images/logo.jpg" ">
         </div>
