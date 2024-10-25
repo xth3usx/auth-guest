@@ -1,6 +1,9 @@
 <?php
 include 'config.php';
 
+ini_set('session.cookie_secure', 1);  // Garante que o cookie de sessão só seja enviado via HTTPS
+ini_set('session.cookie_httponly', 1); // Protege o cookie contra acesso via JavaScript
+
 // Função para gerar o "nonce" (valor aleatório)
 function generateNonce($length = 32) {
     return bin2hex(random_bytes($length / 2));
@@ -21,17 +24,16 @@ function generateCodeChallenge($code_verifier) {
     return rtrim(strtr(base64_encode(hash('sha256', $code_verifier, true)), '+/', '-_'), '=');
 }
 
-// Iniciar nova sessão e regenerar a sessão para evitar fixação de sessão
+// Iniciar a sessão para armazenar o code_verifier
 session_start();
-session_regenerate_id(true);  // Regenerar ID de sessão para segurança
 
-// Gerar novos valores para o fluxo de autenticação OAuth2
+// Gerar valores de nonce, state e code_verifier
 $nonce = generateNonce();
 $state = generateState();
 $code_verifier = generateCodeVerifier();
 $code_challenge = generateCodeChallenge($code_verifier);
 
-// Armazenar o code_verifier na sessão para uso posterior durante a troca do token
+// Armazenar o code_verifier na sessão
 $_SESSION['code_verifier'] = $code_verifier;
 
 // Construir a URL de autenticação do Gov.br (ambiente de testes)
@@ -110,8 +112,9 @@ $auth_url = AUTH_URL . '?response_type=code'
 </head>
 <body>
     <div class="container">
+        <!-- Logo da Universidade -->
         <div class="logo">
-            <img src="/images/logo.jpg" ">
+            <img src="/images/logo.jpg" alt="Descrição Logo">
         </div>
 
         <!-- Título -->
